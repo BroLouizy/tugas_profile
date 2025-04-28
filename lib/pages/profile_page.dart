@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:tugas_profile/gantitema.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  Color backgroundColor = Colors.black;
+
+  void updateTema(bool isDark) {
+    setState(() {
+      backgroundColor = isDark ? Colors.black : Colors.white24
+      ;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: backgroundColor,
       body: Stack(
         children: [
           Positioned.fill(
@@ -79,6 +94,7 @@ class ProfilePage extends StatelessWidget {
                       "Add bio",
                       style: TextStyle(color: Colors.grey, fontSize: 12),
                     ),
+                    Gantitema(onTemaChange: updateTema)
                   ],
                 ),
                 const SizedBox(height: 16),
@@ -94,42 +110,42 @@ class ProfilePage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 8),
-      // Grid konten video
-      Expanded(
-        child: GridView.builder(
-          itemCount: 9,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: 2,
-            mainAxisSpacing: 2,
-          ),
-          itemBuilder: (context, index) {
-            final images = [
-              'images/poto 1.jpg',
-              'images/poto 2.jpg',
-              'images/poto 3.jpg',
-              'images/poto 4.jpg',
-              'images/poto 5.jpg',
-              'images/poto 6.jpg',
-              'images/poto 7.jpg',
-              'images/poto 8.jpg',
-              'images/poto 9.jpg',
-            ];
-            return Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(images[index]),
-                  fit: BoxFit.cover,
+                // Grid konten video
+                Expanded(
+                  child: GridView.builder(
+                    itemCount: 9,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 2,
+                      mainAxisSpacing: 2,
+                    ),
+                    itemBuilder: (context, index) {
+                      final images = [
+                        'images/poto1.jpg',
+                        'images/poto2.jpg',
+                        'images/poto3.jpg',
+                        'images/poto4.jpg',
+                        'images/poto5.jpg',
+                        'images/poto6.jpg',
+                        'images/poto7.jpg',
+                        'images/poto8.jpg',
+                        'images/poto9.jpg',
+                      ];
+                      return Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(images[index]),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.grey[800],
+                        ),
+                      );
+                    },
+                  ),
                 ),
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.grey[800],
-              ),
-            );
-          },
-        ),
-      ),
               ],
-    ),
+            ),
           ),
         ],
       ),
